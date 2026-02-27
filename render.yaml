@@ -5,8 +5,9 @@ services:
     region: singapore
     plan: free
     buildCommand: |
-      pip install --upgrade pip
-      pip install setuptools wheel
+      # Python version force କରନ୍ତୁ
+      python --version
+      pip install --upgrade pip setuptools wheel
       pip install -r requirements.txt
     startCommand: python bot_webhook.py
     envVars:
@@ -22,7 +23,3 @@ services:
         sync: false
       - key: DATABASE_NAME
         value: payment_bot
-      - key: MIN_AMOUNT
-        value: 1
-      - key: MAX_AMOUNT
-        value: 100000
