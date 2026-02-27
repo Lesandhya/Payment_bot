@@ -1,7 +1,6 @@
 import os
 from dotenv import load_dotenv
 
-# Load .env file
 load_dotenv()
 
 # Bot Configuration
@@ -12,6 +11,5 @@ MONGODB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017")
 DATABASE_NAME = os.getenv("DATABASE_NAME", "payment_bot")
 
 # Payment Settings
-MIN_AMOUNT = 1  # Minimum amount in INR
-MAX_AMOUNT = 100000  # Maximum amount in INR
-PAYMENT_TIMEOUT = 3600  # 1 hour in seconds
+MIN_AMOUNT = float(os.getenv("MIN_AMOUNT", 1))
+MAX_AMOUNT = float(os.getenv("MAX_AMOUNT", 100000))
