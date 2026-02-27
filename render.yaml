@@ -2,25 +2,27 @@ services:
   - type: web
     name: telegram-payment-bot
     runtime: python
-    region: singapore  # Choose closest to your users
+    region: singapore
     plan: free
-    buildCommand: pip install -r requirements.txt
+    buildCommand: |
+      pip install --upgrade pip
+      pip install setuptools wheel
+      pip install -r requirements.txt
     startCommand: python bot_webhook.py
-    healthCheckPath: /healthcheck
     envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
       - key: BOT_TOKEN
-        sync: false  # Set manually in Render dashboard
+        sync: false
       - key: RAZORPAY_KEY_ID
         sync: false
       - key: RAZORPAY_KEY_SECRET
         sync: false
       - key: MONGODB_URI
-        value: mongodb+srv://<username>:<password>@cluster.mongodb.net/payment_bot?retryWrites=true&w=majority
+        sync: false
       - key: DATABASE_NAME
         value: payment_bot
       - key: MIN_AMOUNT
         value: 1
       - key: MAX_AMOUNT
         value: 100000
-      - key: PYTHON_VERSION
-        value: 3.11.0
