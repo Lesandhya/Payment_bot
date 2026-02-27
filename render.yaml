@@ -5,6 +5,8 @@ services:
     region: singapore
     plan: free
     buildCommand: |
+      # Python version force କରନ୍ତୁ
+      pyenv local 3.11.9
       python --version
       pip install --upgrade pip setuptools wheel
       pip install -r requirements.txt
@@ -12,13 +14,3 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.9
-      - key: BOT_TOKEN
-        sync: false
-      - key: RAZORPAY_KEY_ID
-        sync: false
-      - key: RAZORPAY_KEY_SECRET
-        sync: false
-      - key: MONGODB_URI
-        sync: false
-      - key: DATABASE_NAME
-        value: payment_bot
