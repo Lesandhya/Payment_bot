@@ -16,7 +16,7 @@ logging.basicConfig(level=logging.INFO)
 
 # Environment variables
 BOT_TOKEN = os.getenv("BOT_TOKEN", config.BOT_TOKEN)
-RENDER_EXTERNAL_URL = os.getenv("RENDER_EXTERNAL_URL")  # Render auto-sets this
+RENDER_EXTERNAL_URL = os.getenv("RENDER_EXTERNAL_URL")
 PORT = int(os.getenv("PORT", 8000))
 
 # Webhook paths
@@ -53,6 +53,22 @@ Available Commands:
 Made with Python 🐍
     """
     await message.reply(welcome_text)
+
+@dp.message_handler(commands=['help'])
+async def help_command(message: types.Message):
+    help_text = f"""
+📖 How to use:
+
+1. Click /pay to start payment
+2. Enter amount (₹{config.MIN_AMOUNT} - ₹{config.MAX_AMOUNT})
+3. Scan QR code or use payment link
+4. Click 'Check Payment' after payment
+5. Get confirmation
+
+Minimum: ₹{config.MIN_AMOUNT}
+Maximum: ₹{config.MAX_AMOUNT}
+    """
+    await message.reply(help_text)
 
 @dp.message_handler(commands=['pay'])
 async def pay_command(message: types.Message):
@@ -205,4 +221,4 @@ if __name__ == '__main__':
         on_shutdown=on_shutdown,
         host='0.0.0.0',
         port=PORT
-      )
+    )
